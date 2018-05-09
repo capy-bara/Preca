@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<unistd.h>
 int main(){
     int array_enemy[5]={1,2,3,4,5};
     int array_mine[5]={1,2,3,4,5};
@@ -46,6 +47,7 @@ int main(){
             }
             else{
                 printf("選べる数字を入力してください\n");
+                sleep(1);
             }
         }//選択終了
         if(match==0){//
