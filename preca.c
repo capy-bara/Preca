@@ -1,7 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<unistd.h>
-int main(){
+#include<time.h>
+int main(void){
+    srand(time(NULL));
     int array_enemy[5]={1,2,3,4,5};
     int array_mine[5]={1,2,3,4,5};
     int match=1;
@@ -16,7 +17,7 @@ int main(){
         printf("カードを選んでください\n");
         for(int i=0;i<5;i++){
             int bad=0;
-            for(int k=0;k<=match;k++){
+            for(int k=0;k<=3;k++){
                 if(array_mine[i]==used_m[k]){
                     bad+=1;
                 }}
@@ -27,7 +28,10 @@ int main(){
         while(error==0){//カード選択
         printf("\nused number:%d,%d,%d,%d",used_m[0],used_m[1],used_m[2],used_m[3]);
             printf("\n選んだカード：");
-            scanf("%d",&chois);
+            if(scanf("%d",&chois)!=1){
+                printf("選べる数字を入力してください\n");
+                scanf("%*s");
+            }else{
             if(1<=chois&&chois<=5){
                 for(int j=0;j<=3;j++){
                     if(chois==used_m[j]){
@@ -47,12 +51,12 @@ int main(){
             }
             else{
                 printf("選べる数字を入力してください\n");
-                sleep(1);
+            }
             }
         }//選択終了
         if(match==0){//
-            chois_e=rand()%5+1;
-            /*if(n<1){
+            int n=rand()%18;
+            if(n<1){
                 chois_e=1;
             }else if(1<=n&&n<=5){
                 chois_e=2;
@@ -63,7 +67,7 @@ int main(){
             }
             else{
                 chois_e=5;
-            }*/
+            }
             
         }else if(match==1||match==2){//ここで分岐
             if(score_e<=score_m){
@@ -185,7 +189,7 @@ int main(){
         used_e[match]=chois_e;
         sume+=chois_e;
         summ+=chois;
-        printf("あなたのスコア：%.2f  敵のスコア：%.2f\n",score_m,score_e);
+        printf("あなたのスコア：%.2f  相手のスコア：%.2f\n",score_m,score_e);
         printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 
 
@@ -194,7 +198,7 @@ int main(){
     if(score_e<score_m){
         printf("^~You're Winner!!~^\n");
     }else if(score_e>score_m){
-        printf("You're looser...\n");
+        printf("You're loser...\n");
     }else{
         printf("  ~Draw~\n");
     }
